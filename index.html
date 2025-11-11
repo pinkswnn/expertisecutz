@@ -1,1 +1,1476 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Expertise Cutz DFW | Dthebarber – Coming Soon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg-dark: #020617;
+      --bg-deep: #02091f;
+      --blue-electric: #0ea5e9;
+      --blue-royal: #1d4ed8;
+      --blue-neon: #38bdf8;
+      --accent: #f97316;
+      --text-main: #e5f2ff;
+      --text-muted: #8ca3c7;
+      --card-bg: rgba(15, 23, 42, 0.85);
+      --border-soft: rgba(148, 163, 184, 0.35);
+      --glow-strong: 0 0 32px rgba(56, 189, 248, 0.65);
+      --glow-soft: 0 0 16px rgba(56, 189, 248, 0.4);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      color: var(--text-main);
+      background: radial-gradient(circle at top left, #0b1120 0%, #020617 45%, #000 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Animated gradient overlay */
+    .animated-bg {
+      position: fixed;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(37, 99, 235, 0.3) 0%, transparent 45%),
+        radial-gradient(circle at 100% 30%, rgba(14, 165, 233, 0.25) 0%, transparent 45%),
+        radial-gradient(circle at 40% 90%, rgba(8, 47, 73, 0.7) 0%, transparent 55%);
+      filter: blur(4px);
+      opacity: 0.85;
+      animation: floatBg 22s ease-in-out infinite alternate;
+      z-index: -3;
+    }
+
+    @keyframes floatBg {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      50% {
+        transform: translate3d(-50px, 40px, 0) scale(1.05);
+      }
+      100% {
+        transform: translate3d(40px, -30px, 0) scale(1.08);
+      }
+    }
+
+    /* Subtle scan line overlay */
+    .scan-lines {
+      position: fixed;
+      inset: 0;
+      background-image: linear-gradient(
+        to bottom,
+        rgba(15, 23, 42, 0.2) 1px,
+        transparent 1px
+      );
+      background-size: 100% 2px;
+      mix-blend-mode: soft-light;
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    /* Floating barber elements */
+    .floating-icon {
+      position: fixed;
+      font-size: 2.4rem;
+      opacity: 0.12;
+      filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5));
+      z-index: -1;
+      animation: floatIcon 18s ease-in-out infinite;
+    }
+
+    .floating-icon:nth-child(1) {
+      top: 14%;
+      left: 7%;
+      animation-delay: 0s;
+    }
+    .floating-icon:nth-child(2) {
+      top: 70%;
+      right: 10%;
+      animation-delay: 3s;
+    }
+    .floating-icon:nth-child(3) {
+      top: 40%;
+      left: 80%;
+      animation-delay: 6s;
+    }
+
+    @keyframes floatIcon {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-35px) rotate(6deg);
+      }
+      100% {
+        transform: translateY(15px) rotate(-4deg);
+      }
+    }
+
+    /* Layout */
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.75rem 1.25rem 4rem;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 0.6rem 0 0.4rem;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+        to bottom,
+        rgba(15, 23, 42, 0.85),
+        rgba(15, 23, 42, 0.35),
+        transparent
+      );
+      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+      z-index: 20;
+    }
+
+    /* Logo placeholder */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: radial-gradient(circle at 0% 0%, #1d4ed8, #020617);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--glow-soft);
+      font-size: 1.25rem;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .logo-text span:first-child {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+    }
+
+    .logo-text span:last-child {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+
+    .logo-placeholder-note {
+      font-size: 0.7rem;
+      opacity: 0.7;
+      margin-top: 2px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-muted);
+      position: relative;
+      padding-bottom: 4px;
+      opacity: 0.85;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 1px;
+      background: linear-gradient(to right, var(--blue-electric), var(--blue-neon));
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--text-main);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .pill-tag {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      padding: 0.3rem 0.9rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.2), transparent);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--text-muted);
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #22c55e, #16a34a);
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.7);
+    }
+
+    main {
+      margin-top: 1.6rem;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: calc(100vh - 72px);
+      display: grid;
+      grid-template-columns: minmax(0, 3.25fr) minmax(0, 2.4fr);
+      gap: 2.4rem;
+      align-items: center;
+      padding: 2.2rem 0 4rem;
+    }
+
+    .hero-left {
+      position: relative;
+    }
+
+    .hero-kicker {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      color: var(--blue-neon);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-kicker::before {
+      content: "";
+      width: 26px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--blue-neon));
+      opacity: 0.85;
+    }
+
+    .hero-title {
+      font-size: clamp(2.6rem, 3.8vw, 3.6rem);
+      line-height: 1.05;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+      text-shadow:
+        0 0 7px rgba(15, 23, 42, 0.9),
+        0 0 25px rgba(56, 189, 248, 0.4);
+    }
+
+    .hero-title span.highlight {
+      background: linear-gradient(to right, #0ea5e9, #1d4ed8);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: var(--glow-soft);
+      display: inline-block;
+    }
+
+    .hero-sub {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      max-width: 30rem;
+      line-height: 1.6;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-sub strong {
+      color: var(--text-main);
+    }
+
+    .hero-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-badge {
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 0.5rem 0.9rem;
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.5));
+      box-shadow: 0 0 18px rgba(15, 23, 42, 0.9);
+      white-space: nowrap;
+    }
+
+    .hero-badge span.icon {
+      font-size: 1rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      align-items: center;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      border-radius: 999px;
+      font-size: 0.9rem;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease,
+        border-color 0.18s ease, color 0.18s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: linear-gradient(
+        135deg,
+        var(--blue-royal),
+        var(--blue-electric),
+        var(--blue-neon)
+      );
+      color: #e5f4ff;
+      box-shadow: var(--glow-strong);
+    }
+
+    .btn-primary::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(248, 250, 252, 0.3) 50%,
+        transparent 100%
+      );
+      transform: translateX(-120%);
+      opacity: 0.0;
+      transition: transform 0.55s ease-out, opacity 0.4s ease-out;
+    }
+
+    .btn-primary:hover::after {
+      transform: translateX(120%);
+      opacity: 1;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow:
+        0 0 20px rgba(56, 189, 248, 0.6),
+        0 0 50px rgba(30, 64, 175, 0.8);
+    }
+
+    .btn-ghost {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid var(--border-soft);
+      color: var(--text-muted);
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(56, 189, 248, 0.9);
+      color: var(--text-main);
+      transform: translateY(-1px);
+      box-shadow: var(--glow-soft);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .hero-note {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.6rem;
+      max-width: 20rem;
+    }
+
+    /* Countdown card */
+    .hero-right {
+      position: relative;
+      perspective: 1400px;
+    }
+
+    .countdown-card {
+      position: relative;
+      border-radius: 26px;
+      background: radial-gradient(circle at 0 0, rgba(37, 99, 235, 0.5), rgba(15, 23, 42, 0.96));
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      padding: 1.4rem 1.4rem 1.35rem;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.85),
+        0 0 40px rgba(56, 189, 248, 0.45);
+      transform-origin: center;
+      transform: rotateY(-8deg) rotateX(10deg) translateY(10px);
+      overflow: hidden;
+    }
+
+    .countdown-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: conic-gradient(
+        from 210deg,
+        rgba(56, 189, 248, 0.45),
+        transparent,
+        transparent,
+        rgba(37, 99, 235, 0.4),
+        transparent
+      );
+      opacity: 0.25;
+      animation: spinLight 18s linear infinite;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    @keyframes spinLight {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-tag-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.2rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(226, 232, 240, 0.9);
+    }
+
+    .card-tag-row span {
+      opacity: 0.9;
+    }
+
+    .card-tag-row strong {
+      color: #f9fafb;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(148, 163, 184, 0.6),
+        transparent
+      );
+      margin-bottom: 1rem;
+    }
+
+    .dthebarber-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: rgba(191, 219, 254, 0.9);
+      margin-bottom: 0.35rem;
+    }
+
+    .dthebarber-name {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .dthebarber-name span {
+      color: var(--accent);
+    }
+
+    .card-quote {
+      font-size: 0.9rem;
+      color: rgba(226, 232, 240, 0.96);
+      margin-bottom: 1.4rem;
+      line-height: 1.6;
+    }
+
+    .card-quote em {
+      font-style: normal;
+      color: var(--blue-neon);
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.55rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .countdown-box {
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 0.5rem 0.35rem 0.55rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .count-number {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .count-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(148, 163, 184, 0.96);
+    }
+
+    .countdown-caption {
+      font-size: 0.7rem;
+      color: rgba(191, 219, 254, 0.85);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mini-pill {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.6rem;
+      padding: 0.22rem 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(226, 232, 240, 0.92);
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 0.35rem;
+      font-size: 0.74rem;
+      color: rgba(226, 232, 240, 0.9);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #22c55e, #15803d);
+      box-shadow: 0 0 12px rgba(22, 163, 74, 0.9);
+      margin-right: 0.4rem;
+      display: inline-block;
+    }
+
+    .social-row {
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .social-badge {
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 184, 0.8);
+      padding: 0.3rem 0.8rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      cursor: pointer;
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .social-badge span.handle {
+      color: var(--blue-neon);
+    }
+
+    /* Sections */
+    section {
+      margin-top: 3.75rem;
+      padding-top: 1.25rem;
+    }
+
+    .section-label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--blue-neon);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-label::before {
+      content: "";
+      width: 14px;
+      height: 14px;
+      border-radius: 6px;
+      border: 1px solid rgba(56, 189, 248, 0.6);
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.6);
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(226, 232, 240, 0.96);
+      margin-bottom: 0.4rem;
+    }
+
+    .section-sub {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.4rem;
+      max-width: 32rem;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .info-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      border: 1px solid var(--border-soft);
+      padding: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-card::after {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.2), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .info-card:hover::after {
+      opacity: 1;
+    }
+
+    .info-label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: rgba(148, 163, 184, 0.96);
+      margin-bottom: 0.4rem;
+    }
+
+    .info-main {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .info-main span {
+      color: var(--blue-neon);
+    }
+
+    .info-text {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .info-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.7rem;
+    }
+
+    .info-tag {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 0.2rem 0.6rem;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: rgba(148, 163, 184, 0.96);
+    }
+
+    /* Vibe section */
+    .vibe-row {
+      display: grid;
+      grid-template-columns: minmax(0, 3.4fr) minmax(0, 2.3fr);
+      gap: 1.6rem;
+      margin-top: 1rem;
+    }
+
+    .vibe-quote-block {
+      background: radial-gradient(circle at 0 0, rgba(37, 99, 235, 0.3), rgba(15, 23, 42, 0.96));
+      border-radius: 24px;
+      border: 1px solid rgba(56, 189, 248, 0.6);
+      padding: 1.1rem 1.1rem 1.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vibe-quote-block::before {
+      content: "✂";
+      position: absolute;
+      right: 1.1rem;
+      top: 0.9rem;
+      font-size: 2.3rem;
+      opacity: 0.08;
+    }
+
+    .vibe-quote-heading {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(191, 219, 254, 0.96);
+      margin-bottom: 0.4rem;
+    }
+
+    .vibe-quote {
+      font-size: 1.02rem;
+      line-height: 1.7;
+      max-width: 30rem;
+    }
+
+    .vibe-quote strong {
+      color: var(--blue-neon);
+    }
+
+    .vibe-meta {
+      margin-top: 0.9rem;
+      font-size: 0.78rem;
+      color: rgba(191, 219, 254, 0.9);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    .vibe-meta span {
+      color: rgba(248, 250, 252, 0.96);
+    }
+
+    .vibe-right-card {
+      background: var(--card-bg);
+      border-radius: 22px;
+      border: 1px dashed rgba(56, 189, 248, 0.7);
+      padding: 0.9rem 1rem 1rem;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      position: relative;
+    }
+
+    .vibe-right-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(191, 219, 254, 0.96);
+      margin-bottom: 0.5rem;
+    }
+
+    .vibe-list {
+      list-style: none;
+      display: grid;
+      gap: 0.45rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .vibe-list li {
+      display: flex;
+      gap: 0.45rem;
+      align-items: flex-start;
+    }
+
+    .vibe-bullet {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      margin-top: 0.3rem;
+      background: radial-gradient(circle, var(--blue-neon), var(--blue-royal));
+      box-shadow: var(--glow-soft);
+    }
+
+    .vibe-caption {
+      font-size: 0.7rem;
+      color: rgba(148, 163, 184, 0.96);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    /* Notify section */
+    .notify-wrap {
+      background: linear-gradient(
+        120deg,
+        rgba(15, 23, 42, 0.96),
+        rgba(15, 23, 42, 0.85),
+        rgba(17, 24, 39, 0.96)
+      );
+      border-radius: 24px;
+      border: 1px solid rgba(56, 189, 248, 0.6);
+      box-shadow:
+        0 20px 55px rgba(15, 23, 42, 0.9),
+        0 0 40px rgba(30, 64, 175, 0.7);
+      padding: 1.4rem 1.4rem 1.3rem;
+      display: grid;
+      grid-template-columns: minmax(0, 3.3fr) minmax(0, 2.2fr);
+      gap: 1.3rem;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .notify-wrap::before {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background: radial-gradient(circle at 0 100%, rgba(56, 189, 248, 0.35), transparent);
+      opacity: 0.28;
+    }
+
+    .notify-main {
+      position: relative;
+      z-index: 1;
+    }
+
+    .notify-kicker {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: rgba(191, 219, 254, 0.96);
+      margin-bottom: 0.45rem;
+    }
+
+    .notify-title {
+      font-size: 1.05rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .notify-sub {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      max-width: 26rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .notify-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .notify-form input[type="email"] {
+      flex: 1;
+      min-width: 0;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.75);
+      background: rgba(15, 23, 42, 0.9);
+      padding: 0.7rem 1rem;
+      font-size: 0.85rem;
+      color: var(--text-main);
+      outline: none;
+    }
+
+    .notify-form input::placeholder {
+      color: rgba(148, 163, 184, 0.9);
+    }
+
+    .notify-form input:focus {
+      border-color: rgba(56, 189, 248, 0.9);
+      box-shadow: var(--glow-soft);
+    }
+
+    .notify-note {
+      font-size: 0.7rem;
+      color: rgba(148, 163, 184, 0.96);
+      margin-top: 0.45rem;
+    }
+
+    .notify-side {
+      position: relative;
+      z-index: 1;
+      font-size: 0.86rem;
+      color: rgba(191, 219, 254, 0.96);
+    }
+
+    .notify-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.7rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .notify-row .bar {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        rgba(148, 163, 184, 0.2),
+        rgba(148, 163, 184, 0.8),
+        transparent
+      );
+    }
+
+    .notify-bullets {
+      list-style: none;
+      display: grid;
+      gap: 0.35rem;
+      font-size: 0.8rem;
+    }
+
+    .notify-bullets li {
+      display: flex;
+      gap: 0.35rem;
+      align-items: flex-start;
+    }
+
+    .notify-bullets span.bolt {
+      font-size: 0.9rem;
+      margin-top: -1px;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.1rem;
+      font-size: 0.7rem;
+      color: rgba(148, 163, 184, 0.95);
+      border-top: 1px solid rgba(30, 64, 175, 0.7);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    footer a {
+      color: var(--blue-neon);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      header {
+        align-items: flex-start;
+      }
+      nav {
+        display: none;
+      }
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding-top: 1.4rem;
+      }
+      .hero-right {
+        order: -1;
+      }
+      .countdown-card {
+        transform: none;
+      }
+      .card-tag-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .notify-wrap {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .notify-side {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding-inline: 1rem;
+      }
+      .hero {
+        padding-bottom: 3rem;
+      }
+      .card-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .vibe-row {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .notify-form {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn-primary,
+      .btn-ghost {
+        justify-content: center;
+        width: 100%;
+      }
+      .countdown-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* Custom scrollbar (desktop) */
+    @media (pointer: fine) {
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #020617;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #1d4ed8, #0ea5e9);
+        border-radius: 999px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated background layers -->
+  <div class="animated-bg"></div>
+  <div class="scan-lines"></div>
+  <div class="floating-icon">✂️</div>
+  <div class="floating-icon">💈</div>
+  <div class="floating-icon">✂️</div>
+
+  <div class="page">
+    <header>
+      <div class="logo">
+        <div class="logo-mark">DFW</div>
+        <div class="logo-text">
+          <span>Expertise Cutz</span>
+          <span>LOGO HERE</span>
+          <span class="logo-placeholder-note">Drop your real logo in this block</span>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:0.85rem;">
+        <div class="pill-tag">
+          <span class="pill-dot"></span>
+          <span>Chair loading · 100%</span>
+        </div>
+        <nav>
+          <a href="#about">About</a>
+          <a href="#vibe">Vibe</a>
+          <a href="#notify">Notify Me</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-left reveal">
+          <div class="hero-kicker">Dallas · Fort Worth · Fade District</div>
+          <h1 class="hero-title">
+            <span class="highlight">DTHEBARBER</span><br />
+            RUNS THE<br />
+            <span class="highlight">EXPERTISE CUTZ</span> CHAIR.
+          </h1>
+          <p class="hero-sub">
+            <strong>expertisecutzdfw.com</strong> is getting lined up.  
+            No templates. No basic. Just <strong>blue-lit, razor-sharp energy</strong> for
+            the clients who like their fades low and their standards high.
+          </p>
+
+          <div class="hero-badge-row">
+            <div class="hero-badge">
+              <span class="icon">💈</span>
+              <span>Precision fades · DFW</span>
+            </div>
+            <div class="hero-badge">
+              <span class="icon">⚡</span>
+              <span>Walk in basic · leave legendary</span>
+            </div>
+            <div class="hero-badge">
+              <span class="icon">🎧</span>
+              <span>Full experience · not just a cut</span>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="document.getElementById('notify').scrollIntoView({behavior:'smooth'})">
+              Get first access
+              <span>→</span>
+            </button>
+            <button class="btn-ghost" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+              Preview the vibe
+            </button>
+          </div>
+          <p class="hero-note">
+            No booking link yet. When the doors open, <strong>Dthebarber’s</strong> daybook fills fast.
+            Drop your email below and you’ll hear the clippers before anyone else.
+          </p>
+        </div>
+
+        <!-- Countdown & DTHEBARBER card -->
+        <div class="hero-right reveal">
+          <div class="countdown-card">
+            <div class="card-inner">
+              <div class="card-tag-row">
+                <span>Coming soon · Web drop</span>
+                <span><strong>EXPERTISECUTZDFW.COM</strong></span>
+              </div>
+              <div class="divider"></div>
+              <div class="dthebarber-label">Artist behind the chair</div>
+              <div class="dthebarber-name">D<span>THE</span>BARBER</div>
+              <p class="card-quote">
+                <em>“I don’t chase clients, I correct lineups.”</em>  
+                Every cut is personal. Every blend is surgical. Your barber could never.
+              </p>
+
+              <div class="countdown-caption">
+                <span>Site launch countdown</span>
+                <span class="mini-pill">DFW · Blue flame</span>
+              </div>
+              <div class="countdown-grid">
+                <div class="countdown-box">
+                  <div class="count-number" id="days">00</div>
+                  <div class="count-label">Days</div>
+                </div>
+                <div class="countdown-box">
+                  <div class="count-number" id="hours">00</div>
+                  <div class="count-label">Hours</div>
+                </div>
+                <div class="countdown-box">
+                  <div class="count-number" id="minutes">00</div>
+                  <div class="count-label">Min</div>
+                </div>
+                <div class="countdown-box">
+                  <div class="count-number" id="seconds">00</div>
+                  <div class="count-label">Sec</div>
+                </div>
+              </div>
+
+              <div class="card-footer">
+                <div>
+                  <span class="status-dot"></span>  
+                  Chair status: <strong>Loading...</strong>
+                </div>
+                <div class="social-row">
+                  <div class="social-badge">
+                    IG · <span class="handle">@DTHEBARBER</span>
+                  </div>
+                  <div class="social-badge">
+                    TIKTOK · <span class="handle">@EXPERTISECUTZDFW</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT SECTION -->
+      <section id="about" class="reveal">
+        <div class="section-label">What’s behind the chair</div>
+        <h2 class="section-title">BLUE LIGHT · SHARP LINES · ZERO HUMBLE</h2>
+        <p class="section-sub">
+          This isn’t a cookie-cutter barbershop. <strong>Dthebarber</strong> built
+          <strong>Expertise Cutz DFW</strong> for the ones who know the difference between
+          a quick cut and a crafted experience.
+        </p>
+
+        <div class="card-grid">
+          <article class="info-card">
+            <div class="info-label">The energy</div>
+            <div class="info-main">Cocky, because the <span>skill backs it up.</span></div>
+            <p class="info-text">
+              Expect banter, bass in the speakers, and a barber that treats your hairline like a flex.
+              If you’re scared of confidence, this isn’t your chair.
+            </p>
+            <div class="info-tag-row">
+              <span class="info-tag">Blue lights</span>
+              <span class="info-tag">Locker-room jokes</span>
+              <span class="info-tag">Game-ready cuts</span>
+            </div>
+          </article>
+
+          <article class="info-card">
+            <div class="info-label">The craft</div>
+            <div class="info-main">Fades that hit from <span>every angle.</span></div>
+            <p class="info-text">
+              Tapers, drop fades, beards, enhancements, razor work.  
+              Lineups so crisp your front camera stops playing with you.
+            </p>
+            <div class="info-tag-row">
+              <span class="info-tag">Precision fades</span>
+              <span class="info-tag">Razor lines</span>
+              <span class="info-tag">Before &amp; after moments</span>
+            </div>
+          </article>
+
+          <article class="info-card">
+            <div class="info-label">The site</div>
+            <div class="info-main">expertisecutzdfw.com as a <span>digital flex.</span></div>
+            <p class="info-text">
+              Animated, fast, and straight to the point.  
+              Clean booking, live availability, and a gallery that proves exactly why
+              <strong>Dthebarber</strong> talks the way he talks.
+            </p>
+            <div class="info-tag-row">
+              <span class="info-tag">Smooth booking</span>
+              <span class="info-tag">Gallery</span>
+              <span class="info-tag">DFW focused</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- VIBE SECTION -->
+      <section id="vibe" class="reveal">
+        <div class="section-label">Barbershop atmosphere</div>
+        <h2 class="section-title">HOW IT FEELS IN THE CHAIR</h2>
+        <p class="section-sub">
+          Blue LEDs. Fresh fades. Trash talk. Respectfully ruthless clippers.  
+          <strong>Dthebarber</strong> doesn’t just cut hair – he edits the whole version of you that walks out.
+        </p>
+
+        <div class="vibe-row">
+          <div class="vibe-quote-block">
+            <div class="vibe-quote-heading">Client POV · After the cut</div>
+            <p class="vibe-quote">
+              “I pulled up regular and left looking like I signed a contract.  
+              <strong>Dthebarber</strong> lined me up so clean I had to reintroduce myself.”
+            </p>
+            <div class="vibe-meta">
+              Verified · <span>Expertise Cutz DFW</span>
+            </div>
+          </div>
+          <aside class="vibe-right-card">
+            <div class="vibe-right-title">What to expect</div>
+            <ul class="vibe-list">
+              <li>
+                <span class="vibe-bullet"></span>
+                <span>Blue-drenched visuals and content that looks as cold as your fade feels.</span>
+              </li>
+              <li>
+                <span class="vibe-bullet"></span>
+                <span>Before/after reels that turn “who cut you?” into free promotion.</span>
+              </li>
+              <li>
+                <span class="vibe-bullet"></span>
+                <span>Merch, add-ons, and upgrades rolling out once the site fully unlocks.</span>
+              </li>
+            </ul>
+            <div class="vibe-caption">
+              This is barbershop talk, leveled up.
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- NOTIFY SECTION -->
+      <section id="notify" class="reveal">
+        <div class="section-label">Stay tapped in</div>
+        <h2 class="section-title">BE FIRST IN THE CHAIR</h2>
+        <p class="section-sub">
+          When expertisecutzdfw.com goes live, the first wave gets the cleanest slots.
+          No spam. Just launch info, new drop alerts, and priority access to
+          <strong>Dthebarber’s</strong> calendar.
+        </p>
+
+        <div class="notify-wrap">
+          <div class="notify-main">
+            <div class="notify-kicker">Early access list</div>
+            <div class="notify-title">Lock in with Dthebarber</div>
+            <p class="notify-sub">
+              Drop your email and you’ll be the first to see the booking link, price updates,
+              and visuals when the site fades in.
+            </p>
+            <form class="notify-form" onsubmit="event.preventDefault(); showThanks();">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email for first access"
+                required
+              />
+              <button type="submit" class="btn-primary">
+                Join the list
+                <span>→</span>
+              </button>
+            </form>
+            <p class="notify-note" id="notify-message">
+              Your info stays between you and the barber’s chair.
+            </p>
+          </div>
+          <aside class="notify-side">
+            <div class="notify-row">
+              <span>Coming soon</span>
+              <div class="bar"></div>
+              <span>expertisecutzdfw.com</span>
+            </div>
+            <ul class="notify-bullets">
+              <li>
+                <span class="bolt">⚡</span>
+                <span>Booking system built for speed – pick your service, time, and be out.</span>
+              </li>
+              <li>
+                <span class="bolt">⚡</span>
+                <span>Gallery stacked with <strong>Dthebarber</strong> fades, tapers, beards, and transformations.</span>
+              </li>
+              <li>
+                <span class="bolt">⚡</span>
+                <span>Blue-heavy visuals, motion effects, and a site that actually feels like the shop.</span>
+              </li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>
+        © <span id="year"></span> Expertise Cutz DFW · Built for
+        <strong>Dthebarber</strong> · All rights reserved.
+      </div>
+      <div>
+        Digital home: <a href="https://expertisecutzdfw.com" target="_blank" rel="noreferrer">expertisecutzdfw.com</a>
+        · Landing page in blue mode.
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Dynamic year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Simple launch countdown (set your real launch date here)
+    // Format: "YYYY-MM-DDTHH:MM:SS"
+    const launchDate = new Date();
+    // Example: set 30 days from now
+    launchDate.setDate(launchDate.getDate() + 30);
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = launchDate.getTime() - now;
+
+      const daysEl = document.getElementById("days");
+      const hoursEl = document.getElementById("hours");
+      const minutesEl = document.getElementById("minutes");
+      const secondsEl = document.getElementById("seconds");
+
+      if (!daysEl) return; // safety
+
+      if (distance <= 0) {
+        daysEl.textContent = "00";
+        hoursEl.textContent = "00";
+        minutesEl.textContent = "00";
+        secondsEl.textContent = "00";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      daysEl.textContent = String(days).padStart(2, "0");
+      hoursEl.textContent = String(hours).padStart(2, "0");
+      minutesEl.textContent = String(minutes).padStart(2, "0");
+      secondsEl.textContent = String(seconds).padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Scroll reveal effects
+    const revealEls = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.18,
+      }
+    );
+    revealEls.forEach((el) => observer.observe(el));
+
+    // Email notify UI feedback
+    function showThanks() {
+      const msg = document.getElementById("notify-message");
+      const emailInput = document.getElementById("email");
+      if (!msg || !emailInput) return;
+
+      msg.textContent =
+        "Locked in. Watch your inbox — Dthebarber will hit you when the site unlocks.";
+      emailInput.value = "";
+    }
+  </script>
+</body>
+</html>
